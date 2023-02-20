@@ -1,0 +1,300 @@
+<nav class="navbar navbar-expand-lg bg-light" style="height: 10vh">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/admin/screen/upload">
+      <img
+        src="/assets/images/logo.svg"
+        alt="Bootstrap"
+        class="ms-4"
+        width="150"
+        height="120"
+      />
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            routerLink="/admin/screen/upload"
+            >Home</a
+          >
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            style="cursor: pointer"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            ScreenShot
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" routerLink="/admin/screen/upload"
+                >Add Screenshot</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="/admin/screen/list"
+                >Screenshot uploaded list</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            style="cursor: pointer"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Account
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">My Profile</a></li>
+            <li>
+              <a
+                class="dropdown-item"
+                style="cursor: pointer"
+                (click)="_auth.logout()"
+                >Logout</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item" *ngIf="checkSelected">
+          <form [formGroup]="typeForm">
+            <div class="row">
+              <div class="col-md-9">
+                <select
+                  name=""
+                  id=""
+                  class="form-control"
+                  formControlName="typeset"
+                >
+                  <option *ngFor="let t of type" [ngValue]="t">{{ t }}</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <a class="btn btn-primary" (click)="changeType()">update</a>
+              </div>
+            </div>
+          </form>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="row mt-5 mb-2">
+  <div class="col-md-2 offset-md-10" *ngIf="checkSelected">
+    <button
+      class="btn btn-danger"
+      data-bs-toggle="modal"
+      data-bs-target="#multiDelModal"
+    >
+      Multiple Delete
+    </button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-10 offset-md-1">
+    <ng-template [ngIf]="allImages.length != 0" [ngIfElse]="alert">
+      <table class="table table-success bg-dark">
+        <thead style="text-align: center">
+          <tr>
+            <th>action</th>
+            <th>sr No</th>
+            <th>image</th>
+            <th>Comp Name</th>
+            <th>Delete</th>
+            <th>Edit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let i of allImages; let n = index"
+            style="text-align: center"
+          >
+            <td>
+              <input
+                type="checkbox"
+                name=""
+                id="{{ i._id }}"
+                value="{{ i._id }}"
+                (change)="onCheckBoxChange($event)"
+              />
+            </td>
+            <td>{{ n + 1 }}</td>
+            <td>
+              <img
+                src="{{ i.image }}"
+                width="50px"
+                height="100px"
+                alt="{{ i.compName }}"
+              />
+            </td>
+            <td>{{ i.compName }}</td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-danger"
+                (click)="askDelete(n + 1, i)"
+                data-bs-toggle="modal"
+                data-bs-target="#delModal"
+              >
+                Delete
+              </button>
+            </td>
+            <td><button type="button" class="btn btn-primary">Edit</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-template>
+  </div>
+</div>
+
+<ng-template #alert>
+  <div class="alert alert-danger">No Data Found</div>
+</ng-template>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="delModal"
+  data-bs-backdrop="static"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          Delete ScreenShot
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        are you sure you want to delete
+        <b *ngIf="indexNum">{{ indexNum }}</b> image
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          #delBtn
+          data-bs-dismiss="modal"
+        >
+          No
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="confDelete(delBtn)"
+        >
+          Yes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="multiDelModal"
+  data-bs-backdrop="static"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          Delete ScreenShot
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        are you sure you want to delete
+        <b *ngIf="ids">{{ ids.length }}</b>
+        {{ ids.length > 1 ? "images" : "image" }}
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          #delBtn
+          data-bs-dismiss="modal"
+        >
+          No
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="confMultiDelete(delBtn)"
+        >
+          Yes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="row">
+  <div class="col-md-3" *ngFor="let i of allImages; let n = index">
+    <div class="card">
+      <div class="card-header">
+        <img
+          src="{{ i.image }}"
+          class="img-top ms-7"
+          width="200px"
+          height="400px"
+          alt=""
+        />
+      </div>
+      <div class="card-body">
+        <h4>Company Name : {{ i.compName }}</h4>
+        <h5>type : {{ i.type }}</h5>
+        <h5>Platform : {{ i.platform }}</h5>
+        <p>Category : {{ i.category }}</p>
+        <p>Upload Date : {{ i.upload_date | date : "d MMMM y" }}</p>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-primary me-5">Edit</button>
+        <button
+          class="btn btn-danger"
+          (click)="askDelete(n + 1, i)"
+          data-bs-toggle="modal"
+          data-bs-target="#delModal"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div> -->

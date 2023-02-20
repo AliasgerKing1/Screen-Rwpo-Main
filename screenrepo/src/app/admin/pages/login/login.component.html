@@ -1,0 +1,45 @@
+<div class="body">
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+	<div class="screen">
+		<div class="screen__content">
+			<form class="login" [formGroup]="loginForm">
+				<div class="login__field">
+          <img src="/assets/images/user.svg" class="login__icon" />
+					<input type="text" class="login__input" formControlName="username" placeholder="User name / Email" [ngClass]="{'is-invalid' : loginForm.controls['username'].errors && checkForm}" />
+          <br />
+			<small class="text-danger" *ngIf="loginForm.controls['username'].errors && checkForm">Insert Username</small>
+        </div>
+				<div class="login__field">
+					<img src="/assets/images/lock.svg" class="login__icon" />
+					<input type="password" class="login__input" formControlName="password" placeholder="Password" [ngClass]="{'is-invalid' : loginForm.controls['password'].errors && checkForm}" />
+          <br />
+          <small class="text-danger" *ngIf="loginForm.controls['password'].errors && checkForm">Insert Password</small>
+				</div>
+        <small class="text-danger">{{errMsg}}</small>
+				<button class="button login__submit" type="submit" (click)="submit()">
+					<span class="button__text">Log In Now</span>
+					<img src="/assets/images/right_arrow.svg" class="button__icon" />
+				</button>
+			</form>
+			<!-- <div class="social-login">
+				<h3>log in via</h3>
+				<div class="social-icons">
+					<a href="#" class="social-login__icon fab fa-instagram"></a>
+					<a href="#" class="social-login__icon fab fa-facebook"></a>
+					<a href="#" class="social-login__icon fab fa-twitter"></a>
+				</div>
+			</div> -->
+		</div>
+		<div class="screen__background">
+			<span class="screen__background__shape screen__background__shape4"></span>
+			<span class="screen__background__shape screen__background__shape3"></span>
+			<span class="screen__background__shape screen__background__shape2"></span>
+			<span class="screen__background__shape screen__background__shape1"></span>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+</div>
