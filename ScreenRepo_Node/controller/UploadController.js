@@ -116,7 +116,11 @@ routes.get("/pagination/:a/:b", (req,res)=> {
         skip = (skip-1)*total;
     }
         Upload.find().skip(skip).limit(total).exec((error,result)=> {
-        res.send(result);
+          let new_result = result.map((x) => {
+            x.image = "http://localhost:3000/screenShots/" + x.image;
+            return x;
+          });
+        res.send(new_result);
     })
 })
 

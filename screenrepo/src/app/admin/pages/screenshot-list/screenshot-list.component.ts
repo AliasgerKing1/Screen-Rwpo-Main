@@ -42,7 +42,6 @@ export class ScreenshotListComponent {
     });
     this._upload.getRecord(this.recPerPage, this.skip).subscribe((result) => {
       this.allImages = result;
-      console.log(result);
     });
     this._upload.getTotalCity().subscribe((result) => {
       this.totalRec = result.total;

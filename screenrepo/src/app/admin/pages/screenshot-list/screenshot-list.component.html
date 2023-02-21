@@ -114,21 +114,6 @@
 <div class="row">
   <div class="col-md-10 offset-md-1">
     <ng-template [ngIf]="allImages.length != 0" [ngIfElse]="alert">
-      <div class="pagination my-4">
-        <li class="page-item" [ngClass]="{ disabled: page == 1 }">
-          <button class="page-link" (click)="paginate(page - 1)">Prev</button>
-        </li>
-        <li
-          class="page-item"
-          [ngClass]="{ active: page == n + 1 }"
-          *ngFor="let i of [].constructor(totalPages); let n = index"
-        >
-          <button class="page-link" (click)="paginate(n + 1)">{{ n + 1 }}</button>
-        </li>
-        <li class="page-item" [ngClass]="{ disabled: page == totalPages }">
-          <button class="page-link" (click)="paginate(page + 1)">Next</button>
-        </li>
-      </div>
       <table class="table table-success bg-dark">
         <thead style="text-align: center">
           <tr>
@@ -137,7 +122,7 @@
             <th>image</th>
             <th>Comp Name</th>
             <th>Delete</th>
-            <th>Edit</th>
+            <th>update</th>
           </tr>
         </thead>
         <tbody>
@@ -176,10 +161,29 @@
                 Delete
               </button>
             </td>
-            <td><button type="button" class="btn btn-primary">Edit</button></td>
+            <td>
+              <button type="button" class="btn btn-primary">Update</button>
+            </td>
           </tr>
         </tbody>
       </table>
+      <div class="pagination my-4">
+        <li class="page-item" [ngClass]="{ disabled: page == 1 }">
+          <button class="page-link" (click)="paginate(page - 1)">Prev</button>
+        </li>
+        <li
+          class="page-item"
+          [ngClass]="{ active: page == n + 1 }"
+          *ngFor="let i of [].constructor(totalPages); let n = index"
+        >
+          <button class="page-link" (click)="paginate(n + 1)">
+            {{ n + 1 }}
+          </button>
+        </li>
+        <li class="page-item" [ngClass]="{ disabled: page == totalPages }">
+          <button class="page-link" (click)="paginate(page + 1)">Next</button>
+        </li>
+      </div>
     </ng-template>
   </div>
 </div>
