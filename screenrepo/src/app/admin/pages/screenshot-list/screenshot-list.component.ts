@@ -17,17 +17,44 @@ export class ScreenshotListComponent {
 
   ids: any = [];
   checkSelected: boolean = false;
-  type: any = ['Select', 'Login', 'Register', 'User', 'Admin'];
+  dataForMultiDelete: any;
+
+  // -----------------pagination---------------
+  allscreenShotsByPagination: any = [];
+  totalRec: any;
+  recPerPage: number = 20;
+  totalPages: any;
+  skip: number = 0;
+  currentPage: number = 0;
+  page: number = 1;
+
+  type: any = ['Login', 'Register', 'User', 'Admin'];
   constructor(
     private _upload: UploadFileService,
     public _auth: AuthService,
     private _fb: FormBuilder
   ) {
-    this._upload.getImages().subscribe((result) => {
-      this.allImages = [result][0];
-    });
+    // this._upload.getImages().subscribe((result) => {
+    //   this.allImages = [result][0];
+    // });
     this.typeForm = this._fb.group({
       typeset: '',
+    });
+    this._upload.getRecord(this.recPerPage, this.skip).subscribe((result) => {
+      this.allImages = result;
+      console.log(result);
+    });
+    this._upload.getTotalCity().subscribe((result) => {
+      this.totalRec = result.total;
+      this.totalPages = Math.ceil(this.totalRec / this.recPerPage);
+    });
+  }
+
+  paginate(num: any) {
+    this.page = num;
+    this.currentPage = (num - 1) * this.recPerPage;
+    this._upload.getRecord(this.recPerPage, num).subscribe((result) => {
+      this.allImages = result;
     });
   }
 
@@ -55,10 +82,13 @@ export class ScreenshotListComponent {
     this.indexNum = Number;
     this.allObj = obj;
   }
-
+  askMultiDelete() {
+    this._upload.getMultiImages(this.ids).subscribe((result) => {
+      this.dataForMultiDelete = result;
+    });
+  }
   confDelete(btn: any) {
-    console.log(this.ids);
-    this._upload.deleteImages(this.ids).subscribe((result) => {
+    this._upload.deleteImages(this.allObj._id).subscribe((result) => {
       if (result.status === 200) {
         let n = this.allImages.indexOf(this.allObj);
         this.allImages.splice(n, 1);
@@ -68,11 +98,14 @@ export class ScreenshotListComponent {
   }
 
   confMultiDelete(btn: any) {
-    console.log(this.ids);
     this._upload.deleteMultiImages(this.ids).subscribe((result) => {
       if (result.status === 200) {
-        let n = this.allImages.indexOf(this.allObj);
-        this.allImages.splice(n, 1);
+        let n = this.dataForMultiDelete.forEach((element: any) => {
+          this.allImages = this.allImages.filter(
+            (value: any) => value !== element
+          );
+        });
+        this.allImages.splice(n, this.dataForMultiDelete.length);
         btn.click();
       }
     });

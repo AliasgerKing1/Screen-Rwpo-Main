@@ -48,4 +48,18 @@ export class UploadFileService {
   updateTypeInImages(id: any, obj: any) {
     return this._http.put<any>(this.apiUrl + '/addtype/' + id, obj);
   }
+
+  // -------------pagination-----------
+
+  getCity() {
+    return this._http.get<any>(this.apiUrl + "/all");
+  }
+
+  getTotalCity() {
+    return this._http.get<any>(this.apiUrl + '/totalCity');
+  }
+
+  getRecord(rec: any, skip: any) {
+    return this._http.get<any>(this.apiUrl + '/pagination/' + rec + '/' + skip);
+  }
 }

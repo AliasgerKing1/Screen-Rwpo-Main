@@ -44,18 +44,9 @@ routes.get("/files/:id", (req, res) => {
     res.send(new_result[0]);
   });
 });
-// routes.delete("/:id", (req, res) => {
-//   let id = req.params.id;
-//   Upload.deleteMany({ _id: id }, (error) => {
-// res.send({success: true})
-//     });
-// });
-routes.delete("/:ids", (req, res) => {
-  let id = req.params.ids;
-  let ids = id.split(",");
-  Upload.deleteMany({ _id: ids.map((x)=> {
-    return x;
-  }) }, (error) => {
+routes.delete("/:id", (req, res) => {
+  let id = req.params.id;
+  Upload.deleteMany({ _id: id }, (error) => {
 res.send({success: true, status : 200})
     });
 });
@@ -102,5 +93,31 @@ routes.put("/addtype/:ids", (req,res)=> {
 res.send({success : true, status : 200})
   })
 });
+
+
+
+// ---------------------pagination----------------
+
+routes.get("/all", (req,res)=> {
+    Upload.find({}, (error , result)=> {
+        res.send(result);
+        })
+})
+
+routes.get("/totalCity", (req,res)=> {
+    Upload.count((error,result)=> {
+        res.send({total : result});
+    })
+})
+routes.get("/pagination/:a/:b", (req,res)=> {
+    let total = req.params.a;
+    let skip = req.params.b;
+    if(skip != 0 ) {
+        skip = (skip-1)*total;
+    }
+        Upload.find().skip(skip).limit(total).exec((error,result)=> {
+        res.send(result);
+    })
+})
 
 module.exports = routes;
