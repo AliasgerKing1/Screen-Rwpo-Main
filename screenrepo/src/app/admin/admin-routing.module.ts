@@ -23,6 +23,11 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
+        path: 'screen/upload/update/:id',
+        component: ScreenShotUploadComponent,
+        canActivate: [AuthGuard],
+      },
+      {
         path: 'screen/list',
         component: ScreenshotListComponent,
         canActivate: [AuthGuard],

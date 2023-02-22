@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UploadFileService } from 'src/app/services/upload-file.service';
 import { AuthService } from '../../services/auth.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-screenshot-list',
@@ -32,7 +33,8 @@ export class ScreenshotListComponent {
   constructor(
     private _upload: UploadFileService,
     public _auth: AuthService,
-    private _fb: FormBuilder
+    private _fb: FormBuilder,
+    private _router: Router
   ) {
     // this._upload.getImages().subscribe((result) => {
     //   this.allImages = [result][0];
@@ -120,5 +122,8 @@ export class ScreenshotListComponent {
           this.checkSelected = false;
         }
       });
+  }
+  redirect(id: any) {
+    this._router.navigate(['/admin/screen/upload/update/' + id]);
   }
 }

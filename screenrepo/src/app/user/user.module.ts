@@ -8,6 +8,7 @@ import { ScreenshotComponent } from './shared/screenshot/screenshot.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { SearchbarComponent } from './shared/searchbar/searchbar.component';
 import { SinglepageComponent } from './pages/singlepage/singlepage.component';
+import { RestrictComponent } from './pages/restrict/restrict.component';
 @NgModule({
   declarations: [
     UserComponent,
@@ -16,6 +17,7 @@ import { SinglepageComponent } from './pages/singlepage/singlepage.component';
     SidebarComponent,
     SearchbarComponent,
     SinglepageComponent,
+    RestrictComponent,
   ],
   imports: [CommonModule, UserRoutingModule],
 })

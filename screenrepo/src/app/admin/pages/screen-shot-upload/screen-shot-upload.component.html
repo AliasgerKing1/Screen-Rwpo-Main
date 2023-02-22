@@ -43,10 +43,10 @@
             type="text"
             formControlName="platform"
             id="platform"
-            class="formbold-form-input">
-
-          <option>Select</option>
-          <option *ngFor="let p of Platform">{{ p }}</option>
+            class="formbold-form-input"
+          >
+            <option>Select</option>
+            <option *ngFor="let p of Platform">{{ p }}</option>
           </select>
           <small
             class="text-danger"
@@ -75,7 +75,7 @@
       <div class="row">
         <div class="col-md-6">
           <div class="formbold-input-file">
-            <div class="formbold-filename-wrapper">
+            <!-- <div class="formbold-filename-wrapper">
               <span class="formbold-filename">
                 website-information-architecture.pdf
 
@@ -123,13 +123,14 @@
                   </defs>
                 </svg>
               </span>
-            </div>
+            </div> -->
             <label for="upload" class="formbold-input-label">
               <svg
                 width="20"
                 height="20"
                 viewBox="0 0 20 20"
                 fill="none"
+                style="cursor: pointer"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <g clip-path="url(#clip0_1670_1531)">
@@ -144,7 +145,7 @@
                   </clipPath>
                 </defs>
               </svg>
-              Add Screenshot
+              <span style="cursor: pointer">Add Screenshot</span>
               <input
                 type="file"
                 id="upload"
@@ -266,7 +267,11 @@
           </div>
         </div>
 
-        <div *ngIf="message.length" class="alert alert-secondary my-3" role="alert">
+        <div
+          *ngIf="message.length"
+          class="alert alert-secondary my-3"
+          role="alert"
+        >
           <ul *ngFor="let msg of message; let i = index">
             <li>{{ msg }}</li>
           </ul>
@@ -280,17 +285,25 @@
             </li>
           </ul>
         </div>
-
       </div>
 
-      <button class="formbold-btn" type="submit" (click)="submit()" [disabled]="!selectedFiles"
-      (click)="uploadFiles()">
-        Add
+      <button
+        class="formbold-btn"
+        type="submit"
+        (click)="submit()"
+        [disabled]="!selectedFiles"
+        (click)="uploadFiles()"
+      >
+        {{ id ? "Update" : "Add" }}
       </button>
     </form>
+    <div class="row mt-5">
+      <div class="col-md-3" *ngIf="updateFile">
+        <img src="{{ updateFile.screen_shot }}" alt="" style="width: 200px" />
+      </div>
+    </div>
   </div>
 </div>
-
 
 <!--
 <form [formGroup]="testForm">

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { UploadFileService } from 'src/app/services/upload-file.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-screen-shot-upload',
@@ -16,6 +16,8 @@ export class ScreenShotUploadComponent implements OnInit {
   checkForm: boolean = false;
   upload_date: any = Date();
   urls: any = [];
+  id: any;
+  updateFile: any;
 
   mainImg: any;
   selectedFiles?: FileList;
@@ -27,7 +29,8 @@ export class ScreenShotUploadComponent implements OnInit {
     public _auth: AuthService,
     private _fb: FormBuilder,
     private _upload: UploadFileService,
-    private _router: Router
+    private _router: Router,
+    private _params: ActivatedRoute
   ) {
     this.uploadForm = this._fb.group({
       compName: ['', Validators.required],
@@ -37,6 +40,14 @@ export class ScreenShotUploadComponent implements OnInit {
       screen_shot: ['', Validators.required],
       upload_date: this.upload_date,
       typeset: '',
+      _id: null,
+      __v: null,
+    });
+
+    this.id = _params.snapshot.paramMap.get('id');
+    _upload.getImagesById(this.id).subscribe((result) => {
+      this.updateFile = result;
+      this.uploadForm.setValue(result);
     });
   }
 
@@ -86,6 +97,11 @@ export class ScreenShotUploadComponent implements OnInit {
   submit() {
     if (this.uploadForm.invalid) {
       this.checkForm = true;
+    }
+    if (this.id) {
+      this._upload
+        .updateImages(this.id, this.uploadForm)
+        .subscribe((result) => {});
     }
   }
 

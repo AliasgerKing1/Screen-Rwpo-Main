@@ -6,7 +6,7 @@ const Upload = mongoose.Schema({
   type: String,
   platform: String,
   category: String,
-  image: String,
+  screen_shot: String,
   upload_date: Date,
   typeset :String
 });

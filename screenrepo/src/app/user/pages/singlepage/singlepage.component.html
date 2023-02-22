@@ -74,7 +74,7 @@
               <img src="/assets/images/share.svg" class="ico2" alt="" />
             </div>
             <div class="rounded mt-5">
-              <a href="{{ allImages.image }}" download="{{ brand }}">
+              <a href="{{ allImages.screen_shot }}" download="{{ brand }}">
                 <img src="/assets/images/download.svg" class="ico3" alt="" />
               </a>
             </div>
@@ -82,7 +82,7 @@
         </div>
         <div class="col-md-6 offset-md-2">
           <img
-            src="{{ allImages.image }}"
+            src="{{ allImages.screen_shot }}"
             style="width: 300px !important"
             class="single-image mt-5"
             alt=""
@@ -107,7 +107,11 @@
       <div class="row mb-5">
         <div class="col-md-2 offset-md-2 mb-5" *ngFor="let i of allCompImages">
           <a (click)="redirect2(i._id)" style="cursor: pointer">
-            <img src="{{ i.image }}" style="width: 200px !important" alt="1" />
+            <img
+              src="{{ i.screen_shot }}"
+              style="width: 200px !important"
+              alt="1"
+            />
           </a>
         </div>
       </div>

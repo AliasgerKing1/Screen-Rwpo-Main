@@ -35,24 +35,26 @@ export class UploadFileService {
   deleteImages(id: any) {
     return this._http.delete<any>(this.apiUrl + '/' + id);
   }
+  updateImages(id: any, obj: any) {
+    return this._http.put<any>(this.apiUrl + '/' + id, obj);
+  }
+  getComp(comp: any) {
+    return this._http.get<any>(this.apiUrl + '/files/data/' + comp);
+  }
+
+  updateTypeInImages(id: any, obj: any) {
+    return this._http.put<any>(this.apiUrl + '/addtype/' + id, obj);
+  }
   deleteMultiImages(id: any) {
     return this._http.delete<any>(this.apiUrl + '/multi/' + id);
   }
   getMultiImages(id: any) {
     return this._http.get<any>(this.apiUrl + '/multi/' + id);
   }
-
-  getComp(comp: any) {
-    return this._http.get<any>(this.apiUrl + '/files/data/' + comp);
-  }
-  updateTypeInImages(id: any, obj: any) {
-    return this._http.put<any>(this.apiUrl + '/addtype/' + id, obj);
-  }
-
   // -------------pagination-----------
 
   getCity() {
-    return this._http.get<any>(this.apiUrl + "/all");
+    return this._http.get<any>(this.apiUrl + '/all');
   }
 
   getTotalCity() {
