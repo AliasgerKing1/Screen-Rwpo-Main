@@ -1,0 +1,129 @@
+<div class="main2">
+  <!-- Sign up form -->
+  <section class="signup">
+    <div class="container">
+      <div class="signup-content">
+        <div class="signup-form">
+          <h2 class="form-title">Sign up</h2>
+          <form
+            class="register-form"
+            id="register-form"
+            [formGroup]="registerForm"
+          >
+            <div class="form-group">
+              <label for="name"
+                ><i class="zmdi zmdi-account material-icons-name"></i
+              ></label>
+              <input
+                type="text"
+                formControlName="name"
+                id="name"
+                placeholder="Your Name"
+                [ngClass]="{
+                  'is-invalid':
+                    registerForm.controls['name'].errors && checkForm
+                }"
+              />
+              <small
+                class="text-danger"
+                *ngIf="registerForm.controls['name'].errors && checkForm "
+                >Insert your Name !</small
+              >
+            </div>
+            <div class="form-group">
+              <label for="email"><i class="zmdi zmdi-email"></i></label>
+              <input
+                type="email"
+                formControlName="email"
+                id="email"
+                placeholder="Your Email"
+                [ngClass]="{
+                  'is-invalid':
+                    registerForm.controls['email'].errors && checkForm
+                }"
+              />
+              <small
+                class="text-danger"
+                *ngIf="registerForm.controls['email'].errors && checkForm"
+                >Insert your Email !</small
+              >
+            </div>
+            <div class="form-group">
+              <label for="pass"><i class="zmdi zmdi-lock"></i></label>
+              <input
+                type="password"
+                formControlName="password"
+                id="pass"
+                placeholder="Password"
+                [ngClass]="{
+                  'is-invalid':
+                    registerForm.controls['password'].errors && checkForm
+                }"
+              />
+              <small
+                class="text-danger"
+                *ngIf="registerForm.controls['password'].errors && checkForm"
+                >Insert your Password !</small
+              >
+            </div>
+            <div class="form-group">
+              <label for="re-pass"
+                ><i class="zmdi zmdi-lock-outline"></i
+              ></label>
+              <input
+                type="password"
+                formControlName="re_pass"
+                id="re_pass"
+                placeholder="Repeat your password"
+                [ngClass]="{
+                  'is-invalid':
+                    registerForm.controls['re_pass'].errors && checkForm
+                }"
+              />
+              <small
+                class="text-danger"
+                *ngIf="registerForm.controls['re_pass'].errors && checkForm"
+                >Insert your Re-Password !</small
+              >
+            </div>
+            <div class="form-group">
+              <input
+                type="checkbox"
+                formControlName="agree_term"
+                id="agree-term"
+                class="agree-term"
+              />
+              <label for="agree-term" class="label-agree-term"
+                ><span><span></span></span>I agree all statements in
+                <a href="#" class="term-service">Terms of service</a></label
+              >
+              <small
+                class="text-danger"
+                *ngIf="registerForm.controls['agree_term'].errors && checkForm"
+                >Agree Terms & Conditions is Mandatory !</small
+              >
+            </div>
+            <div class="form-group form-button">
+              <input
+                type="submit"
+                id="signup"
+                class="form-submit"
+                value="Register"
+                (click)="submit()"
+              />
+            </div>
+          </form>
+        </div>
+        <div class="signup-image">
+          <figure>
+            <img
+              src="./assets/forms/images/signup-image.jpg"
+              alt="sing up image"
+            />
+          </figure>
+          <a href="#" class="signup-image-link">Sign In to account</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

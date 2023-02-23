@@ -8,7 +8,10 @@ import { ScreenshotComponent } from './shared/screenshot/screenshot.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { SearchbarComponent } from './shared/searchbar/searchbar.component';
 import { SinglepageComponent } from './pages/singlepage/singlepage.component';
-import { RestrictComponent } from './pages/restrict/restrict.component';
+import { ScrollRestrictModalComponent } from './pages/scroll-restrict-modal/scroll-restrict-modal.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { LoginComponent } from './pages/login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     UserComponent,
@@ -17,8 +20,10 @@ import { RestrictComponent } from './pages/restrict/restrict.component';
     SidebarComponent,
     SearchbarComponent,
     SinglepageComponent,
-    RestrictComponent,
+    ScrollRestrictModalComponent,
+    RegisterComponent,
+    LoginComponent,
   ],
-  imports: [CommonModule, UserRoutingModule],
+  imports: [CommonModule, UserRoutingModule, ReactiveFormsModule],
 })
 export class UserModule {}

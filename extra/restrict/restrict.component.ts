@@ -1,15 +1,16 @@
-import { Component, HostListener } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { Component, HostListener } from "@angular/core";
+import { Router } from "@angular/router";
+import { AuthService } from "../../screenrepo/src/app/user/services/auth.service";
 
 @Component({
-  selector: 'app-restrict',
-  templateUrl: './restrict.component.html',
-  styleUrls: ['./restrict.component.scss'],
+  selector: "app-restrict",
+  templateUrl: "./restrict.component.html",
+  styleUrls: ["./restrict.component.scss"],
 })
 export class RestrictComponent {
+  overlay: boolean = false;
   maxScrollPosition = 700; // set this to the maximum number of pixels allowed
-  @HostListener('window:scroll')
+  @HostListener("window:scroll")
   onScroll() {
     this.updateScrollPosition();
   }
@@ -22,7 +23,8 @@ export class RestrictComponent {
       0;
     if (scrollPosition > this.maxScrollPosition) {
       if (!this._auth.isLoggedIn()) {
-        this.router.navigate(['/admin']); // replace '/login' with the route to your login page
+        this.overlay = true;
+        // this.router.navigate(['/admin']); // replace '/login' with the route to your login page
       }
     }
   }

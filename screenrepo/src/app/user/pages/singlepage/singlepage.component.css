@@ -1,0 +1,106 @@
+@import url("https://fonts.googleapis.com/css?family=Rubik&display=swap");
+.sidebar {
+  position: fixed;
+  width: 280px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  padding-top: 20px;
+  float: left;
+  background: white !important;
+}
+.sidebar .para {
+  font-size: 13px;
+  color: #999999;
+  margin-bottom: 0;
+  margin-top: 30px;
+  text-transform: uppercase;
+}
+.sidebar img {
+  width: 100px;
+}
+.sidebar a {
+  display: block;
+  padding: 10px 20px;
+  color: #666666;
+  text-decoration: none;
+  font-family: "Rubik";
+  letter-spacing: 2px;
+}
+.sidebar .group {
+  width: 100px;
+}
+.sidebar a:hover {
+  color: #000;
+  margin-left: 20px;
+  transition: 0.4s;
+}
+.sidebar .active {
+  color: #000;
+  margin-left: 20px;
+}
+
+.comp-img {
+  height: 52px;
+  margin-left: -45px;
+}
+
+.brand {
+  font-weight: bold;
+  margin-bottom: -1px;
+}
+
+.type {
+  font-size: 13px;
+  color: #999999;
+}
+
+hr {
+  color: #C8C8C8;
+}
+
+.type-2 {
+  font-size: 15px;
+  color: #999999;
+  font-weight: bold;
+}
+
+.search-area {
+  margin-top: 10px !important;
+}
+
+.rounded {
+  background-color: #DCDCDC;
+  width: 40px;
+  height: 40px;
+  border-radius: 50px !important;
+  cursor: pointer;
+}
+
+.ico1 {
+  left: 50px;
+  margin-left: 13px;
+  margin-top: 13px;
+}
+
+.ico2 {
+  left: 50px;
+  margin-left: 11px;
+  margin-top: 12px;
+}
+
+.ico3 {
+  left: 50px;
+  margin-left: 11px;
+  margin-top: 13px;
+}
+
+.ico4 {
+  left: 50px;
+  margin-left: 13px;
+  margin-top: 13px;
+}
+
+.single-image {
+  height: 700px;
+}/*# sourceMappingURL=singlepage.component.css.map */
